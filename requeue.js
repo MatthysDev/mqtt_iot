@@ -1,17 +1,16 @@
 // requeue.js
 const mongoose = require('mongoose');
 const Message = require('./models/message');
-import dbUrl from './consumer.js';
 
 // connexion à la base de données MongoDB
-mongoose.connect(dbUrl);
+mongoose.connect('mongodb+srv://MatthysDev:passwordtooweak@cluster0.gl8aj0c.mongodb.net/');
 
 // fonction pour requeuer les messages en attente depuis trop longtemps
 async function requeueMessages() {
     while (true) {
         console.log('Checking for expired messages...');
         const currentTime = new Date();
-        const timeout = 1000; // 30 secondes
+        const timeout = 3000; // 30 secondes
         // récupérer les messages en cours depuis trop longtemps
         const expiredMessages = await Message.find({ status: 'in-progress', timestamp: { $lt: new Date(currentTime - timeout) } });
 

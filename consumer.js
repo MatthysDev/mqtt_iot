@@ -3,11 +3,9 @@ const { MongoClient } = require('mongodb');
 const mqtt = require('mqtt');
 const Message = require('./models/message');
 
-export const dnUrl = 'mongodb+srv://MatthysDev:passwordtooweak@cluster0.gl8aj0c.mongodb.net/'
-
 // fonction pour initialiser la connexion à la base de données MongoDB
 async function initMongo() {
-    const mongoClient = new MongoClient(dbUrl);
+    const mongoClient = new MongoClient('mongodb+srv://MatthysDev:passwordtooweak@cluster0.gl8aj0c.mongodb.net/');
     await mongoClient.connect();
     db = mongoClient.db('message');
     console.log('Connected to MongoDB - message');
