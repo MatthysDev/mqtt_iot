@@ -17,11 +17,7 @@ npm install
 
 ### Usage
 
-Remplacer la variable dbUrl du fichier consumer.js par l'url de votre base de données MongoDB.
-
-```javascript
-const dbUrl = 'mongodb://localhost:27017/iot';
-```
+Remplacer le lien de la database mongodb des fichiers consumer.js et requeue par l'url de votre base de données MongoDB.
 
 - [ ] Vérifier que vous êtes bien connecté en ouvrant mongo Atlas et en y ajoutant votre adresse IP.
 
