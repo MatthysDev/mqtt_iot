@@ -1,9 +1,10 @@
 // requeue.js
 const mongoose = require('mongoose');
 const Message = require('./models/message');
+import dbUrl from './consumer.js';
 
 // connexion à la base de données MongoDB
-mongoose.connect('mongodb+srv://MatthysDev:passwordtooweak@cluster0.gl8aj0c.mongodb.net/');
+mongoose.connect(dbUrl);
 
 // fonction pour requeuer les messages en attente depuis trop longtemps
 async function requeueMessages() {
