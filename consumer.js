@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb');
 const mqtt = require('mqtt');
 const Message = require('./models/message');
 
+// fonction pour initialiser la connexion à la base de données MongoDB
 async function initMongo() {
     const mongoClient = new MongoClient('mongodb+srv://MatthysDev:passwordtooweak@cluster0.gl8aj0c.mongodb.net/');
     await mongoClient.connect();
@@ -10,13 +11,16 @@ async function initMongo() {
     console.log('Connected to MongoDB - message');
 }
 
+// initialisation de la connexion au broker MQTT
 const client = mqtt.connect('mqtt://test.mosquitto.org');
 
+// subscribe aux topics 'topic/1' et 'topic/2'
 client.on('connect', () => {
     console.log('Connected to MQTT broker');
     client.subscribe(['topic/1', 'topic/2']);
 });
 
+// fonction pour traiter les messages reçus
 client.on('message', async (topic, message) => {
     const msg = message.toString();
     console.log(`Received message on ${topic}: ${msg}`);
@@ -27,6 +31,7 @@ client.on('message', async (topic, message) => {
     processMessage(newMessage);
 });
 
+// fonction pour traiter les messages
 async function processMessage(message) {
     try {
         console.log(`Processing message: ${message.message}`);
@@ -38,4 +43,5 @@ async function processMessage(message) {
     }
 }
 
+// initialisation de la connexion à MongoDB
 initMongo();
